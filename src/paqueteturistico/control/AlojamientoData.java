@@ -195,6 +195,36 @@ public class AlojamientoData {
             System.out.println("Error al modificar "+ex);
         }
     }
+    
+    public void eliminarAlojamientoxID(int id){
+       String sql = "UPDATE alojamiento SET activo=0 WHERE idAlojamiento=?";
+        
+        
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, id);
+            
+            ps.executeUpdate();           
+            ps.close();
+        } catch (SQLException ex) {
+            System.out.println("Error al modificar "+ex);
+        }
+   }
+   
+   public void eliminarAlojamiento(Alojamiento alojamiento){
+       String sql = "UPDATE alojamiento SET activo=0 WHERE idAlojamiento=?";
+        
+        
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, alojamiento.getIdAlojamiento());
+            
+            ps.executeUpdate();           
+            ps.close();
+        } catch (SQLException ex) {
+            System.out.println("Error al modificar "+ex);
+        }
+   }
 }
 
 
