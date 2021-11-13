@@ -165,7 +165,7 @@ public class MenuData {
         }
    }
    
-   public void eliminarMenux(Menu menu){
+   public void eliminarMenu(Menu menu){
        String sql = "UPDATE menu SET activo=0 WHERE idMenu=?";
         
         
