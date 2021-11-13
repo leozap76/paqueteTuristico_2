@@ -131,6 +131,11 @@ public class PrincipalVista extends javax.swing.JFrame {
 
     private void jPaqueteVista1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPaqueteVista1ActionPerformed
         // TODO add your handling code here:
+        escritorio.removeAll();
+        escritorio.repaint();
+        VistaMenu pv= new VistaMenu();
+        pv.setVisible(true);
+        escritorio.add(pv);
     }//GEN-LAST:event_jPaqueteVista1ActionPerformed
 
     private void jPaqueteVista2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPaqueteVista2ActionPerformed
