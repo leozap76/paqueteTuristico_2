@@ -149,6 +149,36 @@ public class MenuData {
             System.out.println("Error al modificar "+ex);
         }
    }
+   
+   public void eliminarMenuxID(int id){
+       String sql = "UPDATE menu SET activo=0 WHERE idMenu=?";
+        
+        
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, id);
+            
+            ps.executeUpdate();           
+            ps.close();
+        } catch (SQLException ex) {
+            System.out.println("Error al modificar "+ex);
+        }
+   }
+   
+   public void eliminarMenux(Menu menu){
+       String sql = "UPDATE menu SET activo=0 WHERE idMenu=?";
+        
+        
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, menu.getIdMenu());
+            
+            ps.executeUpdate();           
+            ps.close();
+        } catch (SQLException ex) {
+            System.out.println("Error al modificar "+ex);
+        }
+   }
 
 
 }
