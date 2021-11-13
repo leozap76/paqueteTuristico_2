@@ -266,7 +266,7 @@ public class VistaAlojamiento extends javax.swing.JInternalFrame {
     private void jbBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBorrarActionPerformed
         // TODO add your handling code here:
         int id=Integer.parseInt(jtId.getText());
-        alojamientoData.buscarAlojamientosXDestino(id);
+        alojamientoData.eliminarAlojamientoxID(id);
     }//GEN-LAST:event_jbBorrarActionPerformed
 
     private void jbActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbActualizarActionPerformed
@@ -287,7 +287,6 @@ public class VistaAlojamiento extends javax.swing.JInternalFrame {
     private void jbLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbLimpiarActionPerformed
         // TODO add your handling code here:
         jtId.setText("");
-       // jtLegajo.setText("");
         jtNombre.setText("");
         jtTipo.setText("");
         jtPrecio.setText("");
