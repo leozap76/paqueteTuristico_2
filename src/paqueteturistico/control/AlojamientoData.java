@@ -42,6 +42,42 @@ public class AlojamientoData {
     
     }
     
+    public List<Alojamiento> buscarAlojamientos(){
+        List<Alojamiento> alojamientos=new ArrayList<>();
+        DestinoData dd = new DestinoData(conexion);
+        
+        Alojamiento alojamiento=null;
+        
+        String sql="SELECT * FROM alojamiento ";
+        
+        try {
+            PreparedStatement ps= con.prepareStatement(sql);
+            ResultSet rs =ps.executeQuery();
+            
+            while (rs.next()){
+                alojamiento = new Alojamiento();
+                
+                alojamiento.setIdAlojamiento(rs.getInt("idAlojamiento"));
+                alojamiento.setDestino(dd.buscarDestino(rs.getInt("idDestino")));
+                alojamiento.setUbicacion(rs.getString("ubicacion"));
+                alojamiento.setNombreAlojamiento(rs.getString("nombreAlojamiento"));
+                alojamiento.setTipoAlojamiento(rs.getString("tipoAlojamiento"));
+                alojamiento.setPrecioNoche(rs.getFloat("precioNoche"));
+                alojamiento.setActivo(rs.getBoolean("activo"));
+                
+                alojamientos.add(alojamiento);
+
+            }          
+            
+            ps.close();
+            
+        } catch (SQLException ex) {
+            System.out.println("Error al buscar Alojamientos ");
+        }    
+       return alojamientos; 
+        
+    }
+    
     public List<Alojamiento> buscarAlojamientosXDestino(int idDestino){ // alojamientos segun Destino
         List<Alojamiento> alojamientos=new ArrayList<>();
         String sql="SELECT * FROM alojamiento, destino WHERE destino.idDestino=alojamiento.idDestino AND destino.idDestino=? ";
