@@ -34,6 +34,10 @@ public class PrincipalVista extends javax.swing.JFrame {
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
         jmCrearPaquetes = new javax.swing.JMenuItem();
+        jMenu3 = new javax.swing.JMenu();
+        jmCrearPaquetes1 = new javax.swing.JMenuItem();
+        jMenu4 = new javax.swing.JMenu();
+        jmCrearPaquetes2 = new javax.swing.JMenuItem();
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -74,6 +78,30 @@ public class PrincipalVista extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu2);
 
+        jMenu3.setText("Alojamientos");
+
+        jmCrearPaquetes1.setText("Crear Alojamientos");
+        jmCrearPaquetes1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmCrearPaquetes1ActionPerformed(evt);
+            }
+        });
+        jMenu3.add(jmCrearPaquetes1);
+
+        jMenuBar1.add(jMenu3);
+
+        jMenu4.setText("Menu");
+
+        jmCrearPaquetes2.setText("Crear menu");
+        jmCrearPaquetes2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmCrearPaquetes2ActionPerformed(evt);
+            }
+        });
+        jMenu4.add(jmCrearPaquetes2);
+
+        jMenuBar1.add(jMenu4);
+
         setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -101,6 +129,24 @@ public class PrincipalVista extends javax.swing.JFrame {
         escritorio.add(pv);
         //escritorio.moveToFront(pv);
     }//GEN-LAST:event_jmCrearPaquetesActionPerformed
+
+    private void jmCrearPaquetes1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmCrearPaquetes1ActionPerformed
+        // TODO add your handling code here:
+        escritorio.removeAll();
+        escritorio.repaint();
+        VistaAlojamiento pv= new VistaAlojamiento();
+        pv.setVisible(true);
+        escritorio.add(pv);
+    }//GEN-LAST:event_jmCrearPaquetes1ActionPerformed
+
+    private void jmCrearPaquetes2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmCrearPaquetes2ActionPerformed
+        // TODO add your handling code here
+        escritorio.removeAll();
+        escritorio.repaint();
+        VistaMenu pv= new VistaMenu();
+        pv.setVisible(true);
+        escritorio.add(pv);
+    }//GEN-LAST:event_jmCrearPaquetes2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -141,8 +187,12 @@ public class PrincipalVista extends javax.swing.JFrame {
     private javax.swing.JPanel escritorio;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenu jMenu3;
+    private javax.swing.JMenu jMenu4;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JMenuItem jmCrearPaquetes;
+    private javax.swing.JMenuItem jmCrearPaquetes1;
+    private javax.swing.JMenuItem jmCrearPaquetes2;
     // End of variables declaration//GEN-END:variables
 }
