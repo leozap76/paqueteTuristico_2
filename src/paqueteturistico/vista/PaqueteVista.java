@@ -47,31 +47,28 @@ public final class PaqueteVista extends javax.swing.JInternalFrame {
      * Creates new form PaqueteVista
      */
     public PaqueteVista() {
-        initComponents();
-        cargarDestinos();
+        initComponents();    
         
-        
-//        try {
-//            
-////            conexion = new Conexion();
-////            destinoData = new DestinoData(conexion);
-//             transporteData = new TransporteData(conexion);
-//             alojamientoData = new AlojamientoData(conexion);
-//            menuData = new MenuData(conexion);
-////            paqueteData = new PaqueteData(conexion);
-////            listaDestinos = (ArrayList) destinoData.obtenerDestinos();
-//             listaTransportes = (ArrayList)transporteData.ObtenerTransportes();
-//             listaAlojamientos = (ArrayList)alojamientoData.ObtenerAlojamientos();
-//           listaMenues = (ArrayList)menuData.ObtenerMenu();
-////            listaPaquetes = (ArrayList)paqueteData.obtenerPaquetes();
-//            
-//            
-//            //cargarDatos();
-//            
-//            
-//        } catch (ClassNotFoundException ex) {
-//            System.out.println("error" + ex);
-//        }
+        try {
+            
+           conexion = new Conexion();
+           destinoData = new DestinoData(conexion);
+           transporteData = new TransporteData(conexion);
+           alojamientoData = new AlojamientoData(conexion);
+           menuData = new MenuData(conexion);
+           paqueteData = new PaqueteData(conexion);
+           listaDestinos = (ArrayList) destinoData.obtenerDestinos();
+           listaTransportes = (ArrayList)transporteData.obtenerTransportes();
+           listaAlojamientos = (ArrayList)alojamientoData.buscarAlojamiento();
+           listaMenues = (ArrayList)menuData.buscarMenues();
+           listaPaquetes = (ArrayList)paqueteData.obtenerPaquetes();
+           cargarDestinos();
+           cargarDatos();
+            
+            
+        } catch (ClassNotFoundException ex) {
+            System.out.println("error" + ex);
+        }
     }
 
     /**
@@ -188,37 +185,6 @@ public final class PaqueteVista extends javax.swing.JInternalFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(27, 27, 27)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel4)
-                                    .addComponent(jLabel5))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(cbAlojamiento, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(cbMenu, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel3)
-                                .addGap(18, 18, 18)
-                                .addComponent(cbTransporte, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jLabel13)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jtcantDias, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jLabel6)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(jtCantPasajeros, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jbCalcular))
-                    .addComponent(jLabel8)
-                    .addComponent(jLabel9))
-                .addGap(133, 133, 133))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -247,6 +213,37 @@ public final class PaqueteVista extends javax.swing.JInternalFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jtImporteTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(27, 27, 27)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel4)
+                                    .addComponent(jLabel5))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(cbAlojamiento, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(cbMenu, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel3)
+                                .addGap(18, 18, 18)
+                                .addComponent(cbTransporte, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(jLabel13)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jtcantDias, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(jLabel6)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(jtCantPasajeros, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jbCalcular))
+                    .addComponent(jLabel8)
+                    .addComponent(jLabel9))
+                .addGap(133, 133, 133))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -266,7 +263,7 @@ public final class PaqueteVista extends javax.swing.JInternalFrame {
                         .addComponent(jdFechai, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(jdFechar, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 46, Short.MAX_VALUE)
                 .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -289,11 +286,11 @@ public final class PaqueteVista extends javax.swing.JInternalFrame {
                         .addGap(29, 29, 29)
                         .addComponent(jbCalcular))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
+                        .addGap(11, 11, 11)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel13)
                             .addComponent(jtcantDias, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(5, 5, 5)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel6)
                             .addComponent(jtCantPasajeros, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
@@ -325,11 +322,8 @@ public final class PaqueteVista extends javax.swing.JInternalFrame {
     }
      
     private void cbDestinoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbDestinoActionPerformed
-        // TODO add your handling code here:
-       
-     
-       //cbTransporte.addItem(transporteData.obtenerTransportes;
-       
+       cargarDatos();
+
     }//GEN-LAST:event_cbDestinoActionPerformed
 
     private void jbCalcularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCalcularActionPerformed
@@ -339,23 +333,18 @@ public final class PaqueteVista extends javax.swing.JInternalFrame {
         
         String dias= calcularDias(fi,ff)+""; // calcula los dias entre fechas
         jtcantDias.setText(dias);
-        
-        
-        
-        
-        
-        
+           
     }//GEN-LAST:event_jbCalcularActionPerformed
 
     
     public void cargarDatos(){
      
-        
         Destino des =(Destino)cbDestino.getSelectedItem();
         
         for(Transporte t: listaTransportes){
-            if(des.getIdDestino()==t.getDestino().getIdDestino()){
+            if(t.getDestino().getIdDestino()==des.getIdDestino()){
                 cbTransporte.addItem(t.getTipoTransporte());
+                
             }
         }
         for(Alojamiento a: listaAlojamientos){
@@ -372,13 +361,7 @@ public final class PaqueteVista extends javax.swing.JInternalFrame {
             }
      
     }
-        
-        
-//        for(Inscripcion m: listaInscripcion){
-//            if (m.getMateria().getIdMateria() == mat.getIdMateria()){
-//                modelo.addRow(new Object []{m.getAlumno().getIdAlumno(), m.getAlumno().getNombre(), m.getNota()});
-            }
-    
+    }
    
             
 //    public void temporada(){
