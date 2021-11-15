@@ -48,7 +48,7 @@ public class AlojamientoData {
         
         Alojamiento alojamiento=null;
         
-        String sql="SELECT * FROM alojamiento ";
+        String sql="SELECT * FROM paquete_turistico.alojamiento ";
         
         try {
             PreparedStatement ps= con.prepareStatement(sql);
@@ -80,7 +80,7 @@ public class AlojamientoData {
     
     public List<Alojamiento> buscarAlojamientosXDestino(int idDestino){ // alojamientos segun Destino
         List<Alojamiento> alojamientos=new ArrayList<>();
-        String sql="SELECT * FROM alojamiento, destino WHERE destino.idDestino=alojamiento.idDestino AND destino.idDestino=? ";
+        String sql="SELECT * FROM paquete_turistico.alojamiento, paquete_turistico.destino WHERE destino.idDestino=alojamiento.idDestino AND destino.idDestino=? ";
         
         Alojamiento aloj = null;
         Destino des= null;
@@ -121,7 +121,7 @@ public class AlojamientoData {
     }
     
     public Alojamiento obtenerAlojamiento(int idAlojamiento){  
-    String sql="SELECT * FROM alojamiento WHERE idAlojamiento=?";
+    String sql="SELECT * FROM paquete_turistico.alojamiento WHERE idAlojamiento=?";
      
     Alojamiento aloj=new Alojamiento();
     Destino des=new Destino();
@@ -152,7 +152,7 @@ public class AlojamientoData {
    }
     
     public void agregarAlojamiento(Alojamiento alojamiento){
-        String sql = "INSERT INTO alojamiento (idDestino, ubicacion, nombreAlojamiento, tipoAlojamiento, precioNoche, activo) VALUES (?,?,?,?,?,?)";
+        String sql = "INSERT INTO paquete_turistico.alojamiento (idDestino, ubicacion, nombreAlojamiento, tipoAlojamiento, precioNoche, activo) VALUES (?,?,?,?,?,?)";
         
         
         try {
@@ -176,7 +176,7 @@ public class AlojamientoData {
     }
 
     public void actualizarAlojamiento(Alojamiento alojamiento){
-        String sql = "UPDATE alojamiento SET idDestino=?, ubicacion=?, nombreAlojamiento=? ,tipoAlojamiento=?, precioNoche=?, activo=? WHERE idAlojamiento=?";
+        String sql = "UPDATE paquete_turistico.alojamiento SET idDestino=?, ubicacion=?, nombreAlojamiento=? ,tipoAlojamiento=?, precioNoche=?, activo=? WHERE idAlojamiento=?";
         
         
         
@@ -197,7 +197,7 @@ public class AlojamientoData {
     }
     
     public void eliminarAlojamientoxID(int id){
-       String sql = "UPDATE alojamiento SET activo=0 WHERE idAlojamiento=?";
+       String sql = "UPDATE paquete_turistico.alojamiento SET activo=0 WHERE idAlojamiento=?";
         
         
         try {
@@ -212,7 +212,7 @@ public class AlojamientoData {
    }
    
    public void eliminarAlojamiento(Alojamiento alojamiento){
-       String sql = "UPDATE alojamiento SET activo=0 WHERE idAlojamiento=?";
+       String sql = "UPDATE paquete_turistico.alojamiento SET activo=0 WHERE idAlojamiento=?";
         
         
         try {

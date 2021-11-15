@@ -50,7 +50,7 @@ public class MenuData {
     }
     
    public Menu obtenerMenu(int idMenu){
-       String sql="SELECT * FROM menu WHERE idMenu = ?";
+       String sql="SELECT * FROM paquete_turistico.menu WHERE idMenu = ?";
        
        Menu menu= new Menu();
        Alojamiento aloj=new Alojamiento();
@@ -78,7 +78,7 @@ public class MenuData {
    
    public List<Menu> buscarMenuesXAlojamiento(int idAlojamiento){
         List<Menu> menues=new ArrayList<>();
-        String sql="SELECT * FROM menu, alojamiento WHERE menu.idAlojamiento=alojamiento.idAlojamiento AND alojamiento.idAlojamiento=? ";
+        String sql="SELECT * FROM paquete_turistico.menu, paquete_turistico.alojamiento WHERE menu.idAlojamiento=alojamiento.idAlojamiento AND alojamiento.idAlojamiento=? ";
         
          Menu menu=null;
          Alojamiento aloj=null;
@@ -111,7 +111,7 @@ public class MenuData {
     }
    
    public void agregarMenu(Menu menu){
-       String sql = "INSERT INTO menu ( idAlojamiento, tipoMenu, precioMenu, activo) VALUES (?,?,?,?)";
+       String sql = "INSERT INTO paquete_turistico.menu ( idAlojamiento, tipoMenu, precioMenu, activo) VALUES (?,?,?,?)";
         
        
         try {
@@ -133,7 +133,7 @@ public class MenuData {
    }
    
    public void actualizarMenu(Menu menu){
-       String sql = "UPDATE menu SET idAlojamiento=?, tipoMenu=?, precioMenu=? ,activo=? WHERE idMenu=?";
+       String sql = "UPDATE paquete_turistico.menu SET idAlojamiento=?, tipoMenu=?, precioMenu=? ,activo=? WHERE idMenu=?";
         
         
         try {
@@ -151,7 +151,7 @@ public class MenuData {
    }
    
    public void eliminarMenuxID(int id){
-       String sql = "UPDATE menu SET activo=0 WHERE idMenu=?";
+       String sql = "UPDATE paquete_turistico.menu SET activo=0 WHERE idMenu=?";
         
         
         try {
@@ -166,7 +166,7 @@ public class MenuData {
    }
    
    public void eliminarMenu(Menu menu){
-       String sql = "UPDATE menu SET activo=0 WHERE idMenu=?";
+       String sql = "UPDATE paquete_turistico.menu SET activo=0 WHERE idMenu=?";
         
         
         try {
@@ -182,7 +182,7 @@ public class MenuData {
    
    public List<Menu> buscarMenues(){
         List<Menu> menues=new ArrayList<>();
-        String sql="SELECT * FROM menu ";
+        String sql="SELECT * FROM paquete_turistico.menu ";
         
          Menu menu=null;
         
