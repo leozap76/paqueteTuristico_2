@@ -37,7 +37,7 @@ public class VistaMenu extends javax.swing.JInternalFrame {
     public VistaMenu() {
         try {
             initComponents();
-            conexion= new Conexion("jdbc:mysql://localhost/universidad","root","");
+            conexion= new Conexion("jdbc:mysql://localhost/paquete_turistico","root","");
             alojamientoData = new AlojamientoData(conexion);
             menuData = new MenuData(conexion);
             listaAlojamiento = (ArrayList) alojamientoData.buscarAlojamientos();
