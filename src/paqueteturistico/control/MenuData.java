@@ -179,6 +179,38 @@ public class MenuData {
             System.out.println("Error al modificar "+ex);
         }
    }
+   
+   public List<Menu> buscarMenues(){
+        List<Menu> menues=new ArrayList<>();
+        String sql="SELECT * FROM menu ";
+        
+         Menu menu=null;
+        
+             
+        try {
+            PreparedStatement ps= con.prepareStatement(sql);
+            
+            ResultSet rs =ps.executeQuery();
+            
+            while (rs.next()){
+                menu = new Menu();
+                menu.setIdMenu(rs.getInt("idMenu"));
+                
+                menu.setTipoMenu(rs.getString("tipoMenu"));
+                menu.setPrecioMenu(rs.getFloat("precioMenu"));
+                menu.setActivo(rs.getBoolean("activo"));
+                
+
+                menues.add(menu);
+
+            }    
+           ps.close();
+            
+        } catch (SQLException ex) {
+            System.out.println("Error al buscar menus"+ex);
+        }    
+       return menues; 
+   }
 
 
 }
