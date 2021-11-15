@@ -202,7 +202,7 @@
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel4">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Alojamientos"/>
+        <Property name="text" type="java.lang.String" value="Alojamiento"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel7">

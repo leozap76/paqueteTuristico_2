@@ -131,7 +131,7 @@ public class VistaAlojamiento extends javax.swing.JInternalFrame {
             }
         });
 
-        jLabel4.setText("ID Destino");
+        jLabel4.setText("Destino");
 
         jLabel7.setText("Tipo");
 

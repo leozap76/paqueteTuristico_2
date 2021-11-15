@@ -127,7 +127,7 @@ public class VistaMenu extends javax.swing.JInternalFrame {
             }
         });
 
-        jLabel4.setText("Alojamientos");
+        jLabel4.setText("Alojamiento");
 
         jLabel7.setText("Tipo");
 
