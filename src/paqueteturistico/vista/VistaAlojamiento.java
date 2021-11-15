@@ -35,7 +35,7 @@ public class VistaAlojamiento extends javax.swing.JInternalFrame {
     public VistaAlojamiento() {
         try {
             initComponents();
-            conexion= new Conexion("jdbc:mysql://localhost/universidad","root","");
+            conexion= new Conexion("jdbc:mysql://localhost/paquete_turistico","root","");
             alojamientoData = new AlojamientoData(conexion);
             destinoData = new DestinoData(conexion);
             listaDestinos = (ArrayList) destinoData.obtenerDestinos();
