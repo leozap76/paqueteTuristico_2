@@ -48,7 +48,7 @@ public class DestinoData {
         
         Destino destino=null;
         
-        String sql="SELECT * FROM `destino` ";
+        String sql="SELECT * FROM paquete_turistico.destino ";
         
         try {
             PreparedStatement ps= con.prepareStatement(sql);
@@ -75,7 +75,7 @@ public class DestinoData {
     }
  
     public Destino buscarDestino(int idDestino){ //buscar Pais destino por Id
-        String sql="SELECT * FROM destino WHERE idDestino=?";
+        String sql="SELECT * FROM paquete_turistico.destino WHERE idDestino=?";
         
        Destino destino=null;
         
@@ -104,7 +104,7 @@ public class DestinoData {
     }
     
     public void guardarDestino(Destino d1){
-        String sql="INSERT INTO destino (paisDestino, ciudadDestino, activo) VALUES (?,?,?)";
+        String sql="INSERT INTO paquete_turistico.destino (paisDestino, ciudadDestino, activo) VALUES (?,?,?)";
          try {
              PreparedStatement ps = con.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
              ps.setString(1,d1.getPaisDestino());
@@ -123,7 +123,7 @@ public class DestinoData {
     } 
     
     public void borrarDestino(int idDestino){
-        String sql = "UPDATE destino SET activo = 0 WHERE destino.idDestino=?";
+        String sql = "UPDATE paquete_turistico.destino SET activo = 0 WHERE destino.idDestino=?";
         
         try {
             PreparedStatement ps= con.prepareStatement(sql);
@@ -138,7 +138,7 @@ public class DestinoData {
     }
     
     public void borrarDefinitivo(int idDestino){
-      String sql="DELETE FROM destino WHERE idDestino = ?";
+      String sql="DELETE FROM paquete_turistico.destino WHERE idDestino = ?";
 
       PreparedStatement ps;
         try {
@@ -152,7 +152,7 @@ public class DestinoData {
     }  
     
     public void activarDestino(int idDestino){
-        String sql = "UPDATE destino SET activo=? WHERE idDestino=?";
+        String sql = "UPDATE paquete_turistico.destino SET activo=? WHERE idDestino=?";
         try {
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setBoolean(1,true);
@@ -166,7 +166,7 @@ public class DestinoData {
     }
     
     public void modificarDestino(Destino d1){
-       String sql = "UPDATE destino SET paisDestino = ?, ciudadDestino = ?, activo = ? WHERE destino.idDestino =?"; 
+       String sql = "UPDATE paquete_turistico.destino SET paisDestino = ?, ciudadDestino = ?, activo = ? WHERE destino.idDestino =?"; 
         try {
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setString(1, d1.getPaisDestino());
