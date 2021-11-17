@@ -28,6 +28,7 @@ public class VistaMenu extends javax.swing.JInternalFrame {
     private AlojamientoData alojamientoData;
     private Conexion conexion;
     private ArrayList <Alojamiento> listaAlojamiento;
+    private ArrayList <Menu> listaMenu;
     private MenuData menuData;
     
 
@@ -40,8 +41,11 @@ public class VistaMenu extends javax.swing.JInternalFrame {
             conexion= new Conexion("jdbc:mysql://localhost/paquete_turistico","root","");
             alojamientoData = new AlojamientoData(conexion);
             menuData = new MenuData(conexion);
-            listaAlojamiento = (ArrayList) alojamientoData.buscarAlojamientos();
+            listaAlojamiento = (ArrayList) alojamientoData.buscarAlojamientos();  
             cargarAlojamientos();
+            Alojamiento aloj = (Alojamiento)jComboBox1.getSelectedItem();  
+            listaMenu = (ArrayList) menuData.buscarMenuesXAlojamiento(aloj.getIdAlojamiento());
+            cargarMenu();
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(VistaMenu.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -57,11 +61,9 @@ public class VistaMenu extends javax.swing.JInternalFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jbBuscar = new javax.swing.JButton();
-        jtId = new javax.swing.JTextField();
         jtPrecio = new javax.swing.JTextField();
         jcActivo = new javax.swing.JCheckBox();
         jbGuardar = new javax.swing.JButton();
@@ -72,6 +74,8 @@ public class VistaMenu extends javax.swing.JInternalFrame {
         jLabel7 = new javax.swing.JLabel();
         jtTipo = new javax.swing.JTextField();
         jComboBox1 = new javax.swing.JComboBox<>();
+        jLabel2 = new javax.swing.JLabel();
+        cbMenu = new javax.swing.JComboBox<>();
 
         setClosable(true);
         setMaximizable(true);
@@ -79,8 +83,6 @@ public class VistaMenu extends javax.swing.JInternalFrame {
 
         jLabel1.setFont(new java.awt.Font("Engravers MT", 1, 18)); // NOI18N
         jLabel1.setText("Menu");
-
-        jLabel2.setText("ID");
 
         jLabel8.setText("Precio");
 
@@ -131,6 +133,14 @@ public class VistaMenu extends javax.swing.JInternalFrame {
 
         jLabel7.setText("Tipo");
 
+        jComboBox1.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jComboBox1ItemStateChanged(evt);
+            }
+        });
+
+        jLabel2.setText("Menu");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -141,57 +151,56 @@ public class VistaMenu extends javax.swing.JInternalFrame {
                         .addGap(101, 101, 101)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jtPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jtTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(93, 93, 93)
-                        .addComponent(jtId, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jbBuscar))
+                            .addComponent(jtTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cbMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(31, 31, 31)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel7)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel4)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jLabel8)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(jcActivo))
-                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jbBuscar)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
                                 .addComponent(jbGuardar)
-                                .addGap(28, 28, 28)
+                                .addGap(18, 18, 18)
                                 .addComponent(jbBorrar)
-                                .addGap(27, 27, 27)
+                                .addGap(18, 18, 18)
                                 .addComponent(jbActualizar)
                                 .addGap(18, 18, 18)
-                                .addComponent(jbLimpiar))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(51, 51, 51)
-                        .addComponent(jLabel2)
-                        .addGap(86, 86, 86)
-                        .addComponent(jLabel1)))
-                .addGap(139, 139, Short.MAX_VALUE))
+                                .addComponent(jbLimpiar))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel7)
+                                    .addComponent(jLabel8)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(jcActivo))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(126, 126, 126)
+                                        .addComponent(jLabel1))
+                                    .addComponent(jLabel2)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel4)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(0, 0, Short.MAX_VALUE)))))
+                .addGap(59, 59, 59))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(23, 23, 23)
                 .addComponent(jLabel1)
-                .addGap(6, 6, 6)
+                .addGap(13, 13, 13)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(cbMenu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(21, 21, 21)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jtId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel2)
-                            .addComponent(jbBuscar))
-                        .addGap(15, 15, 15)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel4)
-                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(27, 27, 27)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel7)
                             .addComponent(jtTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -207,8 +216,9 @@ public class VistaMenu extends javax.swing.JInternalFrame {
                     .addComponent(jbGuardar)
                     .addComponent(jbBorrar)
                     .addComponent(jbActualizar)
-                    .addComponent(jbLimpiar))
-                .addContainerGap(130, Short.MAX_VALUE))
+                    .addComponent(jbLimpiar)
+                    .addComponent(jbBuscar))
+                .addContainerGap(116, Short.MAX_VALUE))
         );
 
         pack();
@@ -229,32 +239,34 @@ public class VistaMenu extends javax.swing.JInternalFrame {
         Menu menu = new Menu(alojamiento,tipo,precio,activo);
         menuData.agregarMenu(menu);
         
-       jtId.setText(menu.getIdMenu()+"");
+       //jtId.setText(menu.getIdMenu()+"");
     }//GEN-LAST:event_jbGuardarActionPerformed
 
     private void jbBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBorrarActionPerformed
         // TODO add your handling code here:
-        int id=Integer.parseInt(jtId.getText());
-        menuData.eliminarMenuxID(id);
+        
+        Menu menu = (Menu) cbMenu.getSelectedItem();
+        menuData.eliminarMenu(menu);
     }//GEN-LAST:event_jbBorrarActionPerformed
 
     private void jbActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbActualizarActionPerformed
         // TODO add your handling code here:
-        if(jtId.getText()!=null){
-        Alojamiento alojamiento = (Alojamiento)jComboBox1.getSelectedItem();
-        String tipo = jtTipo.getText();
-        float precio=  Float.parseFloat(jtPrecio.getText());
-        boolean activo = jcActivo.isEnabled();
+        Alojamiento aloj = (Alojamiento) jComboBox1.getSelectedItem();
+        Alojamiento alojamiento = alojamientoData.obtenerAlojamiento(aloj.getIdAlojamiento());
+        Menu menu = (Menu) cbMenu.getSelectedItem();
+        Menu menu1 = menuData.obtenerMenu(menu.getIdMenu());
+        menu1.setAlojamiento(alojamiento);
+        menu1.setTipoMenu(jtTipo.getText());
+        menu1.setPrecioMenu(Float.parseFloat(jtPrecio.getText()));
+        menu1.setActivo(jcActivo.isSelected());
+        menuData.actualizarMenu(menu1);
         
-        Menu menu = new Menu(alojamiento,tipo,precio,activo);
-        alojamientoData.actualizarAlojamiento(alojamiento);
-        }
+        
     }//GEN-LAST:event_jbActualizarActionPerformed
 
     private void jbLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbLimpiarActionPerformed
         // TODO add your handling code here:
-        jtId.setText("");
-       
+        
         
         jtTipo.setText("");
         jtPrecio.setText("");
@@ -264,20 +276,23 @@ public class VistaMenu extends javax.swing.JInternalFrame {
 
     private void jbBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBuscarActionPerformed
         // TODO add your handling code here:
-        int id=Integer.parseInt(jtId.getText());
-        Menu menu= menuData.obtenerMenu(id);
-        System.out.println(alojamientoData.obtenerAlojamiento(id));
-        
-        if(menu!=null){
-            
-            jtId.setText(menu.getIdMenu()+"");
+        Alojamiento aloj = (Alojamiento)jComboBox1.getSelectedItem();
+        Menu menu = (Menu)cbMenu.getSelectedItem();
+        if(menu!=null){        
             jComboBox1.setSelectedItem(menu.getAlojamiento());
             jtPrecio.setText(String.valueOf(menu.getPrecioMenu()));
             jtTipo.setText(menu.getTipoMenu());
-            jcActivo.setSelected(menu.isActivo());
-            
+            jcActivo.setSelected(menu.isActivo());      
         }
     }//GEN-LAST:event_jbBuscarActionPerformed
+
+    private void jComboBox1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBox1ItemStateChanged
+        // TODO add your handling code here:
+        cbMenu.removeAllItems();
+        Alojamiento aloj = (Alojamiento)jComboBox1.getSelectedItem();
+        listaMenu = (ArrayList) menuData.buscarMenuesXAlojamiento(aloj.getIdAlojamiento());
+        cargarMenu();
+    }//GEN-LAST:event_jComboBox1ItemStateChanged
     
     public void cargarAlojamientos(){
         listaAlojamiento.forEach((b) -> {
@@ -285,10 +300,18 @@ public class VistaMenu extends javax.swing.JInternalFrame {
         });
     }
     
+    public void cargarMenu(){
+        listaMenu.forEach((b) -> {
+            cbMenu.addItem(b);
+        });
+        listaMenu.clear();
+    }
+    
     
    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<Menu> cbMenu;
     private javax.swing.JComboBox<Alojamiento> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -302,7 +325,6 @@ public class VistaMenu extends javax.swing.JInternalFrame {
     private javax.swing.JButton jbGuardar;
     private javax.swing.JButton jbLimpiar;
     private javax.swing.JCheckBox jcActivo;
-    private javax.swing.JTextField jtId;
     private javax.swing.JTextField jtPrecio;
     private javax.swing.JTextField jtTipo;
     // End of variables declaration//GEN-END:variables
