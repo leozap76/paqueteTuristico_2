@@ -72,7 +72,7 @@ public final class PaqueteVista extends javax.swing.JInternalFrame {
            listaDestinos = (ArrayList) destinoData.obtenerDestinos();
            listaTransportes = (ArrayList)transporteData.obtenerTransportes();
            listaTransportesXDestino = (ArrayList)transporteData.obtenerTransportesXDestino(WIDTH);
-           
+           jtImporteTotal.setEditable(false);
            listaAlojamientos = (ArrayList)alojamientoData.buscarAlojamientos();
            listaMenues = (ArrayList)menuData.buscarMenues();
            listaPaquetes = (ArrayList)paqueteData.obtenerPaquetes();
