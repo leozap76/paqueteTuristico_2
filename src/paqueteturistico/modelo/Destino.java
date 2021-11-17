@@ -76,7 +76,7 @@ public class Destino {
 
     @Override
     public String toString() {
-        return "Destino{" + "idDestino=" + idDestino + ", paisDestino=" + paisDestino + ", ciudadDestino=" + ciudadDestino + ", activo=" + activo + '}';
+        return  ciudadDestino ;
     }
     
     

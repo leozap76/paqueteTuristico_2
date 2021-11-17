@@ -82,7 +82,7 @@ public class Menu {
 
     @Override
     public String toString() {
-        return "Menu{" + "alojamiento=" + alojamiento.getNombreAlojamiento() + ", tipoMenu=" + tipoMenu + ", precioMenu=" + precioMenu + ", activo=" + activo + '}';
+        return  tipoMenu + "  " + precioMenu + "$";
     }
     
     

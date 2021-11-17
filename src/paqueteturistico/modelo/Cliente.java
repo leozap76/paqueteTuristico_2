@@ -90,7 +90,7 @@ public class Cliente {
 
     @Override
     public String toString() {
-        return "Nombre Completo= " + nombreCompleto + ", email= " + email + ", dni= " + dni + ", telefono= " + telefono + "\n";
+        return  nombreCompleto ;
     }
 
     

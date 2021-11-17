@@ -78,7 +78,7 @@ public class Transporte {
 
     @Override
     public String toString() {
-        return "Transporte{" + "destino=" + destino + ", precioViaje=" + precioViaje + ", tipoTransporte=" + tipoTransporte + ", activo=" + activo + '}';
+        return    tipoTransporte + " "  + precioViaje + "$" ;
     }
 
     
