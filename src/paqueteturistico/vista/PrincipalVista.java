@@ -10,13 +10,16 @@ package paqueteturistico.vista;
  * @author Leonardo
  */
 public class PrincipalVista extends javax.swing.JFrame {
-   
+    
 
     /**
      * Creates new form PrincipalVista
      */
     public PrincipalVista() {
         initComponents();
+       PaqueteVista ph= new PaqueteVista();
+       escritorio.add(ph);
+        ph.setVisible(true);
     }
 
     /**
