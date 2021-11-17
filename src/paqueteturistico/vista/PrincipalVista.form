@@ -173,18 +173,28 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Destinos"/>
           </Properties>
+          <SubComponents>
+            <MenuItem class="javax.swing.JMenuItem" name="jmEditarDestinos">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Editar Destinos"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jmEditarDestinosActionPerformed"/>
+              </Events>
+            </MenuItem>
+          </SubComponents>
         </Menu>
         <Menu class="javax.swing.JMenu" name="jMenu2">
           <Properties>
             <Property name="text" type="java.lang.String" value="Paquetes"/>
           </Properties>
           <SubComponents>
-            <MenuItem class="javax.swing.JMenuItem" name="jmCrearPaquetes">
+            <MenuItem class="javax.swing.JMenuItem" name="jmEditarPaquetes">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Crear Paquetes"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jmCrearPaquetesActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jmEditarPaquetesActionPerformed"/>
               </Events>
             </MenuItem>
           </SubComponents>
@@ -194,12 +204,12 @@
             <Property name="text" type="java.lang.String" value="Alojamientos"/>
           </Properties>
           <SubComponents>
-            <MenuItem class="javax.swing.JMenuItem" name="jmBuscaAlojamientos">
+            <MenuItem class="javax.swing.JMenuItem" name="jmEditarAlojamientos">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Editar Alojamientos"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jmBuscaAlojamientosActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jmEditarAlojamientosActionPerformed"/>
               </Events>
             </MenuItem>
           </SubComponents>
@@ -209,12 +219,12 @@
             <Property name="text" type="java.lang.String" value="Menu"/>
           </Properties>
           <SubComponents>
-            <MenuItem class="javax.swing.JMenuItem" name="jmBuscaMenu">
+            <MenuItem class="javax.swing.JMenuItem" name="jmEditarMenu">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Editar Menu"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jmBuscaMenuActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jmEditarMenuActionPerformed"/>
               </Events>
             </MenuItem>
           </SubComponents>
@@ -227,12 +237,12 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenu14ActionPerformed"/>
           </Events>
           <SubComponents>
-            <MenuItem class="javax.swing.JMenuItem" name="jmBuscarTransporte">
+            <MenuItem class="javax.swing.JMenuItem" name="jmEditarTransporte">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Editar Transporte"/>
+                <Property name="text" type="java.lang.String" value="Editar Transportes"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jmBuscarTransporteActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jmEditarTransporteActionPerformed"/>
               </Events>
             </MenuItem>
           </SubComponents>
@@ -244,7 +254,7 @@
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItem7">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Editar Cliente"/>
+                <Property name="text" type="java.lang.String" value="Editar Clientes"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem7ActionPerformed"/>
@@ -279,8 +289,8 @@
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-              <Component id="escritorio" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+              <Component id="escritorio" max="32767" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -299,7 +309,7 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <EmptySpace min="0" pref="566" max="32767" attributes="0"/>
+              <EmptySpace min="0" pref="699" max="32767" attributes="0"/>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">

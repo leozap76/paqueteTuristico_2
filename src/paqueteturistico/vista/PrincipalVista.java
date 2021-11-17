@@ -57,14 +57,15 @@ public class PrincipalVista extends javax.swing.JFrame {
         escritorio = new javax.swing.JDesktopPane();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
+        jmEditarDestinos = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
-        jmCrearPaquetes = new javax.swing.JMenuItem();
+        jmEditarPaquetes = new javax.swing.JMenuItem();
         jMenu9 = new javax.swing.JMenu();
-        jmBuscaAlojamientos = new javax.swing.JMenuItem();
+        jmEditarAlojamientos = new javax.swing.JMenuItem();
         jMenu10 = new javax.swing.JMenu();
-        jmBuscaMenu = new javax.swing.JMenuItem();
+        jmEditarMenu = new javax.swing.JMenuItem();
         jMenu14 = new javax.swing.JMenu();
-        jmBuscarTransporte = new javax.swing.JMenuItem();
+        jmEditarTransporte = new javax.swing.JMenuItem();
         jmEditarCliente = new javax.swing.JMenu();
         jMenuItem7 = new javax.swing.JMenuItem();
 
@@ -135,7 +136,7 @@ public class PrincipalVista extends javax.swing.JFrame {
         escritorio.setLayout(escritorioLayout);
         escritorioLayout.setHorizontalGroup(
             escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 566, Short.MAX_VALUE)
+            .addGap(0, 699, Short.MAX_VALUE)
         );
         escritorioLayout.setVerticalGroup(
             escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -153,41 +154,50 @@ public class PrincipalVista extends javax.swing.JFrame {
         });
 
         jMenu1.setText("Destinos");
+
+        jmEditarDestinos.setText("Editar Destinos");
+        jmEditarDestinos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmEditarDestinosActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jmEditarDestinos);
+
         jMenuBar1.add(jMenu1);
 
         jMenu2.setText("Paquetes");
 
-        jmCrearPaquetes.setText("Crear Paquetes");
-        jmCrearPaquetes.addActionListener(new java.awt.event.ActionListener() {
+        jmEditarPaquetes.setText("Crear Paquetes");
+        jmEditarPaquetes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jmCrearPaquetesActionPerformed(evt);
+                jmEditarPaquetesActionPerformed(evt);
             }
         });
-        jMenu2.add(jmCrearPaquetes);
+        jMenu2.add(jmEditarPaquetes);
 
         jMenuBar1.add(jMenu2);
 
         jMenu9.setText("Alojamientos");
 
-        jmBuscaAlojamientos.setText("Editar Alojamientos");
-        jmBuscaAlojamientos.addActionListener(new java.awt.event.ActionListener() {
+        jmEditarAlojamientos.setText("Editar Alojamientos");
+        jmEditarAlojamientos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jmBuscaAlojamientosActionPerformed(evt);
+                jmEditarAlojamientosActionPerformed(evt);
             }
         });
-        jMenu9.add(jmBuscaAlojamientos);
+        jMenu9.add(jmEditarAlojamientos);
 
         jMenuBar1.add(jMenu9);
 
         jMenu10.setText("Menu");
 
-        jmBuscaMenu.setText("Editar Menu");
-        jmBuscaMenu.addActionListener(new java.awt.event.ActionListener() {
+        jmEditarMenu.setText("Editar Menu");
+        jmEditarMenu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jmBuscaMenuActionPerformed(evt);
+                jmEditarMenuActionPerformed(evt);
             }
         });
-        jMenu10.add(jmBuscaMenu);
+        jMenu10.add(jmEditarMenu);
 
         jMenuBar1.add(jMenu10);
 
@@ -198,19 +208,19 @@ public class PrincipalVista extends javax.swing.JFrame {
             }
         });
 
-        jmBuscarTransporte.setText("Editar Transporte");
-        jmBuscarTransporte.addActionListener(new java.awt.event.ActionListener() {
+        jmEditarTransporte.setText("Editar Transportes");
+        jmEditarTransporte.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jmBuscarTransporteActionPerformed(evt);
+                jmEditarTransporteActionPerformed(evt);
             }
         });
-        jMenu14.add(jmBuscarTransporte);
+        jMenu14.add(jmEditarTransporte);
 
         jMenuBar1.add(jMenu14);
 
         jmEditarCliente.setText("Clientes");
 
-        jMenuItem7.setText("Editar Cliente");
+        jMenuItem7.setText("Editar Clientes");
         jMenuItem7.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem7ActionPerformed(evt);
@@ -227,8 +237,8 @@ public class PrincipalVista extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(escritorio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addComponent(escritorio)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -240,7 +250,7 @@ public class PrincipalVista extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jmCrearPaquetesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmCrearPaquetesActionPerformed
+    private void jmEditarPaquetesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmEditarPaquetesActionPerformed
         // TODO add your handling code here:
         escritorio.removeAll();
         escritorio.repaint();
@@ -248,9 +258,9 @@ public class PrincipalVista extends javax.swing.JFrame {
         pv.setVisible(true);
         escritorio.add(pv);
         escritorio.moveToFront(pv);
-    }//GEN-LAST:event_jmCrearPaquetesActionPerformed
+    }//GEN-LAST:event_jmEditarPaquetesActionPerformed
 
-    private void jmBuscaAlojamientosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmBuscaAlojamientosActionPerformed
+    private void jmEditarAlojamientosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmEditarAlojamientosActionPerformed
         // TODO add your handling code here:
         escritorio.removeAll();
         escritorio.repaint();
@@ -258,9 +268,9 @@ public class PrincipalVista extends javax.swing.JFrame {
         va.setVisible(true);
         escritorio.add(va);
         escritorio.moveToFront(va);
-    }//GEN-LAST:event_jmBuscaAlojamientosActionPerformed
+    }//GEN-LAST:event_jmEditarAlojamientosActionPerformed
 
-    private void jmBuscaMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmBuscaMenuActionPerformed
+    private void jmEditarMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmEditarMenuActionPerformed
         // TODO add your handling code here
         escritorio.removeAll();
         escritorio.repaint();
@@ -268,13 +278,13 @@ public class PrincipalVista extends javax.swing.JFrame {
         vm.setVisible(true);
         escritorio.add(vm);
         escritorio.moveToFront(vm);
-    }//GEN-LAST:event_jmBuscaMenuActionPerformed
+    }//GEN-LAST:event_jmEditarMenuActionPerformed
 
     private void jMenuBar1AncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_jMenuBar1AncestorAdded
         // TODO add your handling code here:
     }//GEN-LAST:event_jMenuBar1AncestorAdded
 
-    private void jmBuscarTransporteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmBuscarTransporteActionPerformed
+    private void jmEditarTransporteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmEditarTransporteActionPerformed
         // TODO add your handling code here:
          escritorio.removeAll();
         escritorio.repaint();
@@ -282,7 +292,7 @@ public class PrincipalVista extends javax.swing.JFrame {
         tv.setVisible(true);
         escritorio.add(tv);
         escritorio.moveToFront(tv);
-    }//GEN-LAST:event_jmBuscarTransporteActionPerformed
+    }//GEN-LAST:event_jmEditarTransporteActionPerformed
 
     private void jMenu14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu14ActionPerformed
         // TODO add your handling code here:
@@ -297,6 +307,16 @@ public class PrincipalVista extends javax.swing.JFrame {
         escritorio.add(vm);
         escritorio.moveToFront(vm);
     }//GEN-LAST:event_jMenuItem7ActionPerformed
+
+    private void jmEditarDestinosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmEditarDestinosActionPerformed
+        // TODO add your handling code here:
+        escritorio.removeAll();
+        escritorio.repaint();
+        DestinoVista vm= new DestinoVista();
+        vm.setVisible(true);
+        escritorio.add(vm);
+        escritorio.moveToFront(vm);
+    }//GEN-LAST:event_jmEditarDestinosActionPerformed
 
     /**
      * @param args the command line arguments
@@ -368,10 +388,11 @@ public class PrincipalVista extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JMenuItem jMenuItem7;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JMenuItem jmBuscaAlojamientos;
-    private javax.swing.JMenuItem jmBuscaMenu;
-    private javax.swing.JMenuItem jmBuscarTransporte;
-    private javax.swing.JMenuItem jmCrearPaquetes;
+    private javax.swing.JMenuItem jmEditarAlojamientos;
     private javax.swing.JMenu jmEditarCliente;
+    private javax.swing.JMenuItem jmEditarDestinos;
+    private javax.swing.JMenuItem jmEditarMenu;
+    private javax.swing.JMenuItem jmEditarPaquetes;
+    private javax.swing.JMenuItem jmEditarTransporte;
     // End of variables declaration//GEN-END:variables
 }
