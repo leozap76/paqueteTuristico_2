@@ -182,7 +182,7 @@ public class MenuData {
    
    public List<Menu> buscarMenues(){
         List<Menu> menues=new ArrayList<>();
-        String sql="SELECT * FROM paquete_turistico.menu ";
+        String sql="SELECT * FROM menu ";
         
          Menu menu=null;
         
@@ -191,6 +191,7 @@ public class MenuData {
             PreparedStatement ps= con.prepareStatement(sql);
             
             ResultSet rs =ps.executeQuery();
+            Alojamiento aloj=null;
             
             while (rs.next()){
                 menu = new Menu();
@@ -199,6 +200,9 @@ public class MenuData {
                 menu.setTipoMenu(rs.getString("tipoMenu"));
                 menu.setPrecioMenu(rs.getFloat("precioMenu"));
                 menu.setActivo(rs.getBoolean("activo"));
+                menu.setIdMenu(rs.getInt("idMenu"));
+                aloj=this.buscarAlojamiento(rs.getInt("idAlojamiento"));
+                menu.setAlojamiento(aloj);
                 
 
                 menues.add(menu);
@@ -210,7 +214,8 @@ public class MenuData {
             System.out.println("Error al buscar menus"+ex);
         }    
        return menues; 
-   }
+        
+    }
 
 
 }
