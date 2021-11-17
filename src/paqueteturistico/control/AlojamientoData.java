@@ -42,33 +42,32 @@ public class AlojamientoData {
     
     }
     
-    public List<Alojamiento> buscarAlojamientos(){
+    public List<Alojamiento> buscarAlojamientos(){ // todos los alojamientos
         List<Alojamiento> alojamientos=new ArrayList<>();
-        DestinoData dd = new DestinoData(conexion);
+        String sql="SELECT * FROM alojamiento ";
         
-        Alojamiento alojamiento=null;
-        
-        String sql="SELECT * FROM paquete_turistico.alojamiento ";
-        
+        Alojamiento aloj = null;
+          
         try {
-            PreparedStatement ps= con.prepareStatement(sql);
+            PreparedStatement ps= con.prepareStatement(sql);          
             ResultSet rs =ps.executeQuery();
+            Destino des=null;
             
             while (rs.next()){
-                alojamiento = new Alojamiento();
+                aloj=new Alojamiento();
                 
-                alojamiento.setIdAlojamiento(rs.getInt("idAlojamiento"));
-                alojamiento.setDestino(dd.buscarDestino(rs.getInt("idDestino")));
-                alojamiento.setUbicacion(rs.getString("ubicacion"));
-                alojamiento.setNombreAlojamiento(rs.getString("nombreAlojamiento"));
-                alojamiento.setTipoAlojamiento(rs.getString("tipoAlojamiento"));
-                alojamiento.setPrecioNoche(rs.getFloat("precioNoche"));
-                alojamiento.setActivo(rs.getBoolean("activo"));
+                aloj.setIdAlojamiento(rs.getInt("idAlojamiento"));              
+                aloj.setUbicacion(rs.getString("ubicacion"));
+                aloj.setNombreAlojamiento(rs.getString("nombreAlojamiento"));
+                aloj.setTipoAlojamiento(rs.getString("tipoAlojamiento"));
+                aloj.setPrecioNoche(rs.getFloat("precioNoche"));
+                aloj.setActivo(rs.getBoolean("activo"));
+                des=this.buscarDestino(rs.getInt("idDestino"));
+                aloj.setDestino(des);
                 
-                alojamientos.add(alojamiento);
-
-            }          
-            
+                alojamientos.add(aloj);
+            }   
+         
             ps.close();
             
         } catch (SQLException ex) {
