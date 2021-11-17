@@ -16,11 +16,13 @@ import java.util.Date;
 import java.util.Locale;
 import javax.swing.JOptionPane;
 import paqueteturistico.control.AlojamientoData;
+import paqueteturistico.control.ClienteData;
 import paqueteturistico.control.DestinoData;
 import paqueteturistico.control.MenuData;
 import paqueteturistico.control.PaqueteData;
 import paqueteturistico.control.TransporteData;
 import paqueteturistico.modelo.Alojamiento;
+import paqueteturistico.modelo.Cliente;
 import paqueteturistico.modelo.Conexion;
 import paqueteturistico.modelo.Destino;
 import paqueteturistico.modelo.Menu;
@@ -35,12 +37,14 @@ import paqueteturistico.modelo.Transporte;
 public final class PaqueteVista extends javax.swing.JInternalFrame {
     private DestinoData destinoData;
     
+    private ArrayList <Cliente> listaClientes;
     private ArrayList <Destino> listaDestinos;
     private ArrayList <Transporte> listaTransportes;
     private ArrayList <Transporte> listaTransportesXDestino;
     private ArrayList <Alojamiento> listaAlojamientos;
     private ArrayList <Menu> listaMenues;
     private ArrayList <Paquete> listaPaquetes;
+    private ClienteData clienteData;
     private TransporteData transporteData;
     private AlojamientoData alojamientoData;
     private PaqueteData paqueteData;
@@ -58,11 +62,13 @@ public final class PaqueteVista extends javax.swing.JInternalFrame {
         try {
             
            conexion = new Conexion();
+           clienteData= new ClienteData(conexion);
            destinoData = new DestinoData(conexion);
            transporteData = new TransporteData(conexion);
            alojamientoData = new AlojamientoData(conexion);
            menuData = new MenuData(conexion);
            paqueteData = new PaqueteData(conexion);
+           listaClientes = (ArrayList) clienteData.buscarClientes();
            listaDestinos = (ArrayList) destinoData.obtenerDestinos();
            listaTransportes = (ArrayList)transporteData.obtenerTransportes();
            listaTransportesXDestino = (ArrayList)transporteData.obtenerTransportesXDestino(WIDTH);
@@ -71,6 +77,7 @@ public final class PaqueteVista extends javax.swing.JInternalFrame {
            listaMenues = (ArrayList)menuData.buscarMenues();
            listaPaquetes = (ArrayList)paqueteData.obtenerPaquetes();
            cargarDestinos();
+           cargarClientes();
            //cargarDatos();
             
             
@@ -128,6 +135,8 @@ public final class PaqueteVista extends javax.swing.JInternalFrame {
         jbBuscar = new javax.swing.JButton();
         jcMedia = new javax.swing.JCheckBox();
         jbLimpiar = new javax.swing.JButton();
+        jLabel14 = new javax.swing.JLabel();
+        cbCliente = new javax.swing.JComboBox<>();
 
         jTextField1.setText("jTextField1");
 
@@ -152,7 +161,7 @@ public final class PaqueteVista extends javax.swing.JInternalFrame {
 
         jLabel1.setText("Destino : ");
 
-        jLabel2.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Engravers MT", 1, 18)); // NOI18N
         jLabel2.setText(" Paquete");
 
         cbDestino.addActionListener(new java.awt.event.ActionListener() {
@@ -236,11 +245,19 @@ public final class PaqueteVista extends javax.swing.JInternalFrame {
             }
         });
 
+        jLabel14.setText("Cliente");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jbLimpiar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jbSalir)
+                .addGap(37, 37, 37))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
@@ -254,38 +271,17 @@ public final class PaqueteVista extends javax.swing.JInternalFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(cbAlojamiento, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(cbMenu, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
-                .addGap(47, 47, 47)
-                .addComponent(jLabel1)
-                .addGap(35, 35, 35)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2)
+                            .addComponent(cbMenu, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(41, 41, 41)
+                        .addComponent(jLabel1)
+                        .addGap(35, 35, 35)
                         .addComponent(cbDestino, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jbBuscar)))
-                .addGap(35, 35, 35))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jbLimpiar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jbSalir)
-                .addGap(37, 37, 37))
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jbBuscar)
+                        .addGap(29, 29, 29))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(58, 58, 58)
-                        .addComponent(jLabel13)
-                        .addGap(22, 22, 22)
-                        .addComponent(jtcantDias, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(33, 33, 33)
-                        .addComponent(jLabel6)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jtCantPasajeros, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(15, 15, 15)
+                        .addGap(9, 9, 9)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel8)
@@ -302,24 +298,49 @@ public final class PaqueteVista extends javax.swing.JInternalFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jcMedia))
                             .addGroup(layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 66, Short.MAX_VALUE)
                                 .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jcAlta))
+                        .addComponent(jcAlta)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(58, 58, 58)
+                        .addComponent(jLabel13)
+                        .addGap(22, 22, 22)
+                        .addComponent(jtcantDias, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(33, 33, 33)
+                        .addComponent(jLabel6)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jtCantPasajeros, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(25, 25, 25)
                         .addComponent(jbCalcular)
                         .addGap(18, 18, 18)
                         .addComponent(jLabel7)
                         .addGap(18, 18, 18)
-                        .addComponent(jtImporteTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(15, Short.MAX_VALUE))
+                        .addComponent(jtImporteTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(164, 164, 164)
+                        .addComponent(jLabel2))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(21, 21, 21)
+                        .addComponent(jLabel14)
+                        .addGap(43, 43, 43)
+                        .addComponent(cbCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jLabel2)
-                .addGap(17, 17, 17)
+                .addGap(14, 14, 14)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel14)
+                    .addComponent(cbCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(cbDestino, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -353,7 +374,7 @@ public final class PaqueteVista extends javax.swing.JInternalFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jdFechar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel9, javax.swing.GroupLayout.Alignment.TRAILING))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
+                .addGap(31, 31, 31)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel13)
                     .addComponent(jtcantDias, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -394,7 +415,9 @@ public final class PaqueteVista extends javax.swing.JInternalFrame {
      
      
      public void limpiar(){
+        
          
+        cbCliente.removeAllItems();
         cbTransporte.removeAllItems();
         cbAlojamiento.removeAllItems();
         cbMenu.removeAllItems();   
@@ -433,26 +456,31 @@ public final class PaqueteVista extends javax.swing.JInternalFrame {
     }
         
        
-        LocalDate f11 = f1.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-        LocalDate f22 = f2.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
         
-        int mesi = f22.getMonthValue();
-        f22.getDayOfMonth();
-        int mesr = f11.getMonthValue();
-        f11.getDayOfMonth();
+        LocalDate fini = f2.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
         
-        if (mesi==1 || mesi==7){
-            jcAlta.setSelected(true);
-            int band=1;
-           
+        int mesi = fini.getMonthValue();
+        fini.getDayOfMonth();
+        
+        int band = 0;
+        
+        switch (mesi) {
+            case 1:
+            case 7:
+                jcAlta.setSelected(true);
+                band=1;
+                break;
+            case 2:
+            case 6:
+                jcMedia.setSelected(true);
+                band=2;
+                break;
+            default:
+                jcBaja.setSelected(true);
+                break;
         }
-        if(mesi==2 && mesi==6){
-            jcMedia.setSelected(true);
-            int band=2;
-            
-        }else jcBaja.setSelected(true);
         
-        Destino des =(Destino)cbDestino.getSelectedItem();
+        
         Transporte tr=(Transporte)cbTransporte.getSelectedItem();
         Alojamiento al =(Alojamiento)cbAlojamiento.getSelectedItem();
         Menu me =(Menu)cbMenu.getSelectedItem();
@@ -464,8 +492,8 @@ public final class PaqueteVista extends javax.swing.JInternalFrame {
         int cantDias=Integer.parseInt(dias);
         int cantPas=Integer.parseInt(jtCantPasajeros.getText());
         
-        float total=(impT*2)+(impA*cantDias)+(impM*cantDias)*cantPas;
-        int band = 0;
+        float total=((impT*2)+(impA*cantDias)+(impM*cantDias))*cantPas;
+        
         
         if(band==1){
             
@@ -566,6 +594,12 @@ public final class PaqueteVista extends javax.swing.JInternalFrame {
        
      }
     
+    public void cargarClientes(){
+        for(Cliente c: listaClientes){
+            cbCliente.addItem(c);
+        }
+       
+     }
      
     
 
@@ -575,6 +609,7 @@ public final class PaqueteVista extends javax.swing.JInternalFrame {
     private javax.swing.ButtonGroup buttonGroup3;
     private javax.swing.ButtonGroup buttonGroup4;
     private javax.swing.JComboBox<Alojamiento> cbAlojamiento;
+    private javax.swing.JComboBox<Cliente> cbCliente;
     private javax.swing.JComboBox<Destino> cbDestino;
     private javax.swing.JComboBox<Menu> cbMenu;
     private javax.swing.JComboBox<Transporte> cbTransporte;
@@ -587,6 +622,7 @@ public final class PaqueteVista extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;

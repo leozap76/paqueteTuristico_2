@@ -45,6 +45,15 @@ public class PrincipalVista extends javax.swing.JFrame {
         jMenu12 = new javax.swing.JMenu();
         jMenuItem3 = new javax.swing.JMenuItem();
         jMenu13 = new javax.swing.JMenu();
+        jMenuItem4 = new javax.swing.JMenuItem();
+        jMenuItem5 = new javax.swing.JMenuItem();
+        jMenuBar6 = new javax.swing.JMenuBar();
+        jMenu15 = new javax.swing.JMenu();
+        jMenu16 = new javax.swing.JMenu();
+        jMenuItem6 = new javax.swing.JMenuItem();
+        jMenuBar7 = new javax.swing.JMenuBar();
+        jMenu18 = new javax.swing.JMenu();
+        jMenu19 = new javax.swing.JMenu();
         escritorio = new javax.swing.JDesktopPane();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
@@ -56,6 +65,8 @@ public class PrincipalVista extends javax.swing.JFrame {
         jmBuscaMenu = new javax.swing.JMenuItem();
         jMenu14 = new javax.swing.JMenu();
         jmBuscarTransporte = new javax.swing.JMenuItem();
+        jmEditarCliente = new javax.swing.JMenu();
+        jMenuItem7 = new javax.swing.JMenuItem();
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -100,6 +111,24 @@ public class PrincipalVista extends javax.swing.JFrame {
 
         jMenu13.setText("jMenu13");
 
+        jMenuItem4.setText("jMenuItem4");
+
+        jMenuItem5.setText("jMenuItem5");
+
+        jMenu15.setText("File");
+        jMenuBar6.add(jMenu15);
+
+        jMenu16.setText("Edit");
+        jMenuBar6.add(jMenu16);
+
+        jMenuItem6.setText("jMenuItem6");
+
+        jMenu18.setText("File");
+        jMenuBar7.add(jMenu18);
+
+        jMenu19.setText("Edit");
+        jMenuBar7.add(jMenu19);
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         javax.swing.GroupLayout escritorioLayout = new javax.swing.GroupLayout(escritorio);
@@ -140,7 +169,7 @@ public class PrincipalVista extends javax.swing.JFrame {
 
         jMenu9.setText("Alojamientos");
 
-        jmBuscaAlojamientos.setText("Busca Alojamientos");
+        jmBuscaAlojamientos.setText("Editar Alojamientos");
         jmBuscaAlojamientos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jmBuscaAlojamientosActionPerformed(evt);
@@ -152,7 +181,7 @@ public class PrincipalVista extends javax.swing.JFrame {
 
         jMenu10.setText("Menu");
 
-        jmBuscaMenu.setText("Busca Menu");
+        jmBuscaMenu.setText("Editar Menu");
         jmBuscaMenu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jmBuscaMenuActionPerformed(evt);
@@ -162,14 +191,14 @@ public class PrincipalVista extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu10);
 
-        jMenu14.setText("Transporte");
+        jMenu14.setText("Transportes");
         jMenu14.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenu14ActionPerformed(evt);
             }
         });
 
-        jmBuscarTransporte.setText("Buscar Transporte");
+        jmBuscarTransporte.setText("Editar Transporte");
         jmBuscarTransporte.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jmBuscarTransporteActionPerformed(evt);
@@ -178,6 +207,18 @@ public class PrincipalVista extends javax.swing.JFrame {
         jMenu14.add(jmBuscarTransporte);
 
         jMenuBar1.add(jMenu14);
+
+        jmEditarCliente.setText("Clientes");
+
+        jMenuItem7.setText("Editar Cliente");
+        jMenuItem7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem7ActionPerformed(evt);
+            }
+        });
+        jmEditarCliente.add(jMenuItem7);
+
+        jMenuBar1.add(jmEditarCliente);
 
         setJMenuBar(jMenuBar1);
 
@@ -247,6 +288,16 @@ public class PrincipalVista extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jMenu14ActionPerformed
 
+    private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
+        // TODO add your handling code here:
+         escritorio.removeAll();
+        escritorio.repaint();
+        ClientesVista vm= new ClientesVista();
+        vm.setVisible(true);
+        escritorio.add(vm);
+        escritorio.moveToFront(vm);
+    }//GEN-LAST:event_jMenuItem7ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -290,6 +341,10 @@ public class PrincipalVista extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu12;
     private javax.swing.JMenu jMenu13;
     private javax.swing.JMenu jMenu14;
+    private javax.swing.JMenu jMenu15;
+    private javax.swing.JMenu jMenu16;
+    private javax.swing.JMenu jMenu18;
+    private javax.swing.JMenu jMenu19;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
@@ -303,13 +358,20 @@ public class PrincipalVista extends javax.swing.JFrame {
     private javax.swing.JMenuBar jMenuBar3;
     private javax.swing.JMenuBar jMenuBar4;
     private javax.swing.JMenuBar jMenuBar5;
+    private javax.swing.JMenuBar jMenuBar6;
+    private javax.swing.JMenuBar jMenuBar7;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
+    private javax.swing.JMenuItem jMenuItem4;
+    private javax.swing.JMenuItem jMenuItem5;
+    private javax.swing.JMenuItem jMenuItem6;
+    private javax.swing.JMenuItem jMenuItem7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JMenuItem jmBuscaAlojamientos;
     private javax.swing.JMenuItem jmBuscaMenu;
     private javax.swing.JMenuItem jmBuscarTransporte;
     private javax.swing.JMenuItem jmCrearPaquetes;
+    private javax.swing.JMenu jmEditarCliente;
     // End of variables declaration//GEN-END:variables
 }
