@@ -29,15 +29,33 @@ public class PrincipalVista extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        escritorio = new javax.swing.JPanel();
+        jMenuBar2 = new javax.swing.JMenuBar();
+        jMenu3 = new javax.swing.JMenu();
+        jMenu4 = new javax.swing.JMenu();
+        jMenuBar3 = new javax.swing.JMenuBar();
+        jMenu5 = new javax.swing.JMenu();
+        jMenu6 = new javax.swing.JMenu();
+        jMenuBar4 = new javax.swing.JMenuBar();
+        jMenu7 = new javax.swing.JMenu();
+        jMenu8 = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
+        jMenuItem2 = new javax.swing.JMenuItem();
+        jMenuBar5 = new javax.swing.JMenuBar();
+        jMenu11 = new javax.swing.JMenu();
+        jMenu12 = new javax.swing.JMenu();
+        jMenuItem3 = new javax.swing.JMenuItem();
+        jMenu13 = new javax.swing.JMenu();
+        escritorio = new javax.swing.JDesktopPane();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
         jmCrearPaquetes = new javax.swing.JMenuItem();
-        jMenu3 = new javax.swing.JMenu();
-        jmCrearPaquetes1 = new javax.swing.JMenuItem();
-        jMenu4 = new javax.swing.JMenu();
-        jmCrearPaquetes2 = new javax.swing.JMenuItem();
+        jMenu9 = new javax.swing.JMenu();
+        jmBuscaAlojamientos = new javax.swing.JMenuItem();
+        jMenu10 = new javax.swing.JMenu();
+        jmBuscaMenu = new javax.swing.JMenuItem();
+        jMenu14 = new javax.swing.JMenu();
+        jmBuscarTransporte = new javax.swing.JMenuItem();
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -50,18 +68,60 @@ public class PrincipalVista extends javax.swing.JFrame {
             .addGap(0, 100, Short.MAX_VALUE)
         );
 
+        jMenu3.setText("File");
+        jMenuBar2.add(jMenu3);
+
+        jMenu4.setText("Edit");
+        jMenuBar2.add(jMenu4);
+
+        jMenu5.setText("File");
+        jMenuBar3.add(jMenu5);
+
+        jMenu6.setText("Edit");
+        jMenuBar3.add(jMenu6);
+
+        jMenu7.setText("File");
+        jMenuBar4.add(jMenu7);
+
+        jMenu8.setText("Edit");
+        jMenuBar4.add(jMenu8);
+
+        jMenuItem1.setText("jMenuItem1");
+
+        jMenuItem2.setText("jMenuItem2");
+
+        jMenu11.setText("File");
+        jMenuBar5.add(jMenu11);
+
+        jMenu12.setText("Edit");
+        jMenuBar5.add(jMenu12);
+
+        jMenuItem3.setText("jMenuItem3");
+
+        jMenu13.setText("jMenu13");
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         javax.swing.GroupLayout escritorioLayout = new javax.swing.GroupLayout(escritorio);
         escritorio.setLayout(escritorioLayout);
         escritorioLayout.setHorizontalGroup(
             escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGap(0, 566, Short.MAX_VALUE)
         );
         escritorioLayout.setVerticalGroup(
             escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 390, Short.MAX_VALUE)
+            .addGap(0, 538, Short.MAX_VALUE)
         );
+
+        jMenuBar1.addAncestorListener(new javax.swing.event.AncestorListener() {
+            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
+            }
+            public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
+                jMenuBar1AncestorAdded(evt);
+            }
+            public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
+            }
+        });
 
         jMenu1.setText("Destinos");
         jMenuBar1.add(jMenu1);
@@ -78,29 +138,46 @@ public class PrincipalVista extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu2);
 
-        jMenu3.setText("Alojamientos");
+        jMenu9.setText("Alojamientos");
 
-        jmCrearPaquetes1.setText("Crear Alojamientos");
-        jmCrearPaquetes1.addActionListener(new java.awt.event.ActionListener() {
+        jmBuscaAlojamientos.setText("Busca Alojamientos");
+        jmBuscaAlojamientos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jmCrearPaquetes1ActionPerformed(evt);
+                jmBuscaAlojamientosActionPerformed(evt);
             }
         });
-        jMenu3.add(jmCrearPaquetes1);
+        jMenu9.add(jmBuscaAlojamientos);
 
-        jMenuBar1.add(jMenu3);
+        jMenuBar1.add(jMenu9);
 
-        jMenu4.setText("Menu");
+        jMenu10.setText("Menu");
 
-        jmCrearPaquetes2.setText("Crear menu");
-        jmCrearPaquetes2.addActionListener(new java.awt.event.ActionListener() {
+        jmBuscaMenu.setText("Busca Menu");
+        jmBuscaMenu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jmCrearPaquetes2ActionPerformed(evt);
+                jmBuscaMenuActionPerformed(evt);
             }
         });
-        jMenu4.add(jmCrearPaquetes2);
+        jMenu10.add(jmBuscaMenu);
 
-        jMenuBar1.add(jMenu4);
+        jMenuBar1.add(jMenu10);
+
+        jMenu14.setText("Transporte");
+        jMenu14.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenu14ActionPerformed(evt);
+            }
+        });
+
+        jmBuscarTransporte.setText("Buscar Transporte");
+        jmBuscarTransporte.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmBuscarTransporteActionPerformed(evt);
+            }
+        });
+        jMenu14.add(jmBuscarTransporte);
+
+        jMenuBar1.add(jMenu14);
 
         setJMenuBar(jMenuBar1);
 
@@ -108,13 +185,15 @@ public class PrincipalVista extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(escritorio, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(escritorio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(escritorio, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(escritorio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
@@ -127,26 +206,46 @@ public class PrincipalVista extends javax.swing.JFrame {
         PaqueteVista pv= new PaqueteVista();
         pv.setVisible(true);
         escritorio.add(pv);
-        //escritorio.moveToFront(pv);
+        escritorio.moveToFront(pv);
     }//GEN-LAST:event_jmCrearPaquetesActionPerformed
 
-    private void jmCrearPaquetes1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmCrearPaquetes1ActionPerformed
+    private void jmBuscaAlojamientosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmBuscaAlojamientosActionPerformed
         // TODO add your handling code here:
         escritorio.removeAll();
         escritorio.repaint();
-        VistaAlojamiento pv= new VistaAlojamiento();
-        pv.setVisible(true);
-        escritorio.add(pv);
-    }//GEN-LAST:event_jmCrearPaquetes1ActionPerformed
+        VistaAlojamiento va= new VistaAlojamiento();
+        va.setVisible(true);
+        escritorio.add(va);
+        escritorio.moveToFront(va);
+    }//GEN-LAST:event_jmBuscaAlojamientosActionPerformed
 
-    private void jmCrearPaquetes2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmCrearPaquetes2ActionPerformed
+    private void jmBuscaMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmBuscaMenuActionPerformed
         // TODO add your handling code here
         escritorio.removeAll();
         escritorio.repaint();
-        VistaMenu pv= new VistaMenu();
-        pv.setVisible(true);
-        escritorio.add(pv);
-    }//GEN-LAST:event_jmCrearPaquetes2ActionPerformed
+        VistaMenu vm= new VistaMenu();
+        vm.setVisible(true);
+        escritorio.add(vm);
+        escritorio.moveToFront(vm);
+    }//GEN-LAST:event_jmBuscaMenuActionPerformed
+
+    private void jMenuBar1AncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_jMenuBar1AncestorAdded
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuBar1AncestorAdded
+
+    private void jmBuscarTransporteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmBuscarTransporteActionPerformed
+        // TODO add your handling code here:
+         escritorio.removeAll();
+        escritorio.repaint();
+        TransporteVista tv= new TransporteVista();
+        tv.setVisible(true);
+        escritorio.add(tv);
+        escritorio.moveToFront(tv);
+    }//GEN-LAST:event_jmBuscarTransporteActionPerformed
+
+    private void jMenu14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu14ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenu14ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -184,15 +283,33 @@ public class PrincipalVista extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel escritorio;
+    private javax.swing.JDesktopPane escritorio;
     private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu10;
+    private javax.swing.JMenu jMenu11;
+    private javax.swing.JMenu jMenu12;
+    private javax.swing.JMenu jMenu13;
+    private javax.swing.JMenu jMenu14;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
+    private javax.swing.JMenu jMenu5;
+    private javax.swing.JMenu jMenu6;
+    private javax.swing.JMenu jMenu7;
+    private javax.swing.JMenu jMenu8;
+    private javax.swing.JMenu jMenu9;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuBar jMenuBar2;
+    private javax.swing.JMenuBar jMenuBar3;
+    private javax.swing.JMenuBar jMenuBar4;
+    private javax.swing.JMenuBar jMenuBar5;
+    private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JMenuItem jmBuscaAlojamientos;
+    private javax.swing.JMenuItem jmBuscaMenu;
+    private javax.swing.JMenuItem jmBuscarTransporte;
     private javax.swing.JMenuItem jmCrearPaquetes;
-    private javax.swing.JMenuItem jmCrearPaquetes1;
-    private javax.swing.JMenuItem jmCrearPaquetes2;
     // End of variables declaration//GEN-END:variables
 }

@@ -7,9 +7,14 @@ package paqueteturistico.vista;
 
 import com.toedter.calendar.JCalendar;
 import com.toedter.calendar.JDateChooser;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
+import javax.swing.JOptionPane;
 import paqueteturistico.control.AlojamientoData;
 import paqueteturistico.control.DestinoData;
 import paqueteturistico.control.MenuData;
@@ -32,6 +37,7 @@ public final class PaqueteVista extends javax.swing.JInternalFrame {
     
     private ArrayList <Destino> listaDestinos;
     private ArrayList <Transporte> listaTransportes;
+    private ArrayList <Transporte> listaTransportesXDestino;
     private ArrayList <Alojamiento> listaAlojamientos;
     private ArrayList <Menu> listaMenues;
     private ArrayList <Paquete> listaPaquetes;
@@ -59,11 +65,13 @@ public final class PaqueteVista extends javax.swing.JInternalFrame {
            paqueteData = new PaqueteData(conexion);
            listaDestinos = (ArrayList) destinoData.obtenerDestinos();
            listaTransportes = (ArrayList)transporteData.obtenerTransportes();
+           listaTransportesXDestino = (ArrayList)transporteData.obtenerTransportesXDestino(WIDTH);
+           
            listaAlojamientos = (ArrayList)alojamientoData.buscarAlojamientos();
            listaMenues = (ArrayList)menuData.buscarMenues();
            listaPaquetes = (ArrayList)paqueteData.obtenerPaquetes();
            cargarDestinos();
-           cargarDatos();
+           //cargarDatos();
             
             
         } catch (ClassNotFoundException ex) {
@@ -90,7 +98,9 @@ public final class PaqueteVista extends javax.swing.JInternalFrame {
         buttonGroup3 = new javax.swing.ButtonGroup();
         buttonGroup4 = new javax.swing.ButtonGroup();
         jRadioButton1 = new javax.swing.JRadioButton();
+        jDateChooser3 = new com.toedter.calendar.JDateChooser();
         jPanel1 = new javax.swing.JPanel();
+        jButton1 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         cbDestino = new javax.swing.JComboBox<>();
@@ -108,12 +118,16 @@ public final class PaqueteVista extends javax.swing.JInternalFrame {
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         jcAlta = new javax.swing.JCheckBox();
-        jcMedia = new javax.swing.JCheckBox();
+        jcBaja = new javax.swing.JCheckBox();
+        jdFechai = new com.toedter.calendar.JDateChooser();
         jLabel13 = new javax.swing.JLabel();
         jtcantDias = new javax.swing.JTextField();
         jbCalcular = new javax.swing.JButton();
-        jdFechai = new com.toedter.calendar.JDateChooser();
         jdFechar = new com.toedter.calendar.JDateChooser();
+        jbSalir = new javax.swing.JButton();
+        jbBuscar = new javax.swing.JButton();
+        jcMedia = new javax.swing.JCheckBox();
+        jbLimpiar = new javax.swing.JButton();
 
         jTextField1.setText("jTextField1");
 
@@ -134,6 +148,8 @@ public final class PaqueteVista extends javax.swing.JInternalFrame {
             .addGap(0, 100, Short.MAX_VALUE)
         );
 
+        jButton1.setText("jButton1");
+
         jLabel1.setText("Destino : ");
 
         jLabel2.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
@@ -151,15 +167,11 @@ public final class PaqueteVista extends javax.swing.JInternalFrame {
 
         jLabel5.setText("Menu :");
 
-        cbTransporte.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-        cbAlojamiento.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-        cbMenu.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
         jLabel6.setText("Cant.Pasajeros :");
 
-        jLabel7.setText("Importe total");
+        jLabel7.setText("Importe total  $");
+
+        jtCantPasajeros.setText("1");
 
         jLabel8.setText("Fecha inicio");
 
@@ -168,10 +180,20 @@ public final class PaqueteVista extends javax.swing.JInternalFrame {
         jLabel10.setText("Temporada");
 
         jcAlta.setText("Alta");
+        jcAlta.setEnabled(false);
+        jcAlta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jcAltaActionPerformed(evt);
+            }
+        });
 
-        jcMedia.setText("Media");
+        jcBaja.setText("Baja");
+        jcBaja.setToolTipText("");
+        jcBaja.setEnabled(false);
 
-        jLabel13.setText("Cant. dias :");
+        jLabel13.setText("Cantidad dias :");
+
+        jtcantDias.setEnabled(false);
 
         jbCalcular.setText("Calcular");
         jbCalcular.addActionListener(new java.awt.event.ActionListener() {
@@ -180,96 +202,129 @@ public final class PaqueteVista extends javax.swing.JInternalFrame {
             }
         });
 
+        jdFechar.addAncestorListener(new javax.swing.event.AncestorListener() {
+            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
+            }
+            public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
+                jdFecharAncestorAdded(evt);
+            }
+            public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
+            }
+        });
+
+        jbSalir.setText("Salir");
+        jbSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbSalirActionPerformed(evt);
+            }
+        });
+
+        jbBuscar.setText("Buscar");
+        jbBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbBuscarActionPerformed(evt);
+            }
+        });
+
+        jcMedia.setText("Media");
+        jcMedia.setEnabled(false);
+
+        jbLimpiar.setText("Limpiar");
+        jbLimpiar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbLimpiarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jLabel3)
+                        .addGap(18, 18, 18)
+                        .addComponent(cbTransporte, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel5))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(cbAlojamiento, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(cbMenu, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addGap(47, 47, 47)
+                .addComponent(jLabel1)
+                .addGap(35, 35, 35)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel2)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(cbDestino, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jbBuscar)))
+                .addGap(35, 35, 35))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jbLimpiar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jbSalir)
+                .addGap(37, 37, 37))
+            .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(20, 20, 20)
-                        .addComponent(jLabel1)
-                        .addGap(35, 35, 35)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2)
-                            .addComponent(cbDestino, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(58, 58, 58)
+                        .addComponent(jLabel13)
+                        .addGap(22, 22, 22)
+                        .addComponent(jtcantDias, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(33, 33, 33)
+                        .addComponent(jLabel6)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jtCantPasajeros, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(96, 96, 96)
+                        .addGap(15, 15, 15)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel8)
+                                .addGap(21, 21, 21)
+                                .addComponent(jdFechai, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel9)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jdFechar, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jcAlta)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGap(18, 18, 18)
+                                .addComponent(jcBaja)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jcMedia))
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(31, 31, 31)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jdFechai, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jdFechar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(183, 183, 183)
-                        .addComponent(jLabel7)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jtImporteTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(27, 27, 27)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel4)
-                                    .addComponent(jLabel5))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(cbAlojamiento, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(cbMenu, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel3)
-                                .addGap(18, 18, 18)
-                                .addComponent(cbTransporte, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel13)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jtcantDias, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel6)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jtCantPasajeros, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jbCalcular))
+                                .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jcAlta))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel8)
-                            .addComponent(jLabel9))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addGap(133, 133, 133))
+                        .addGap(25, 25, 25)
+                        .addComponent(jbCalcular)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel7)
+                        .addGap(18, 18, 18)
+                        .addComponent(jtImporteTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(15, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addGap(20, 20, 20)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel1)
-                            .addComponent(cbDestino, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(22, 22, 22)
-                        .addComponent(jLabel8))
-                    .addComponent(jdFechai, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(22, 22, 22)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel9)
-                    .addComponent(jdFechar, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
-                .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel2)
+                .addGap(17, 17, 17)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jcAlta)
-                    .addComponent(jcMedia))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addComponent(jLabel1)
+                    .addComponent(cbDestino, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jbBuscar))
+                .addGap(33, 33, 33)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(cbTransporte, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -281,24 +336,39 @@ public final class PaqueteVista extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(cbMenu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(26, 26, 26)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(29, 29, 29)
-                        .addComponent(jbCalcular))
+                        .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jcAlta)
+                            .addComponent(jcMedia)
+                            .addComponent(jcBaja)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(11, 11, 11)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel13)
-                            .addComponent(jtcantDias, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel6)
-                            .addComponent(jtCantPasajeros, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(30, 30, 30)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jdFechai, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel8))
+                        .addGap(16, 16, 16)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jdFechar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel9, javax.swing.GroupLayout.Alignment.TRAILING))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel13)
+                    .addComponent(jtcantDias, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel6)
+                    .addComponent(jtCantPasajeros, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jtImporteTotal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel7))
-                .addGap(14, 14, 14))
+                    .addComponent(jLabel7)
+                    .addComponent(jbCalcular))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jbSalir)
+                    .addComponent(jbLimpiar))
+                .addGap(16, 16, 16))
         );
 
         pack();
@@ -311,7 +381,7 @@ public final class PaqueteVista extends javax.swing.JInternalFrame {
             Calendar inicio=fi.getCalendar();
             Calendar termino=ff.getCalendar();
             
-            
+           
             while (inicio.before(termino)||inicio.equals(termino)){
                 dias++;
                 inicio.add(Calendar.DATE,1);
@@ -321,62 +391,179 @@ public final class PaqueteVista extends javax.swing.JInternalFrame {
         return dias;       
     }
      
+     
+     
+     public void limpiar(){
+         
+        cbTransporte.removeAllItems();
+        cbAlojamiento.removeAllItems();
+        cbMenu.removeAllItems();   
+        jcBaja.setSelected(false);
+        jcMedia.setSelected(false);
+        jcAlta.setSelected(false);
+        
+        jtcantDias.setText("");
+        jtCantPasajeros.setText("");
+        jtImporteTotal.setText("");
+        jdFechai.setDateFormatString("");
+        jdFechar.setDateFormatString("");
+                
+     }
+     
     private void cbDestinoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbDestinoActionPerformed
-       cargarDatos();
+       //cargarDatos();
 
     }//GEN-LAST:event_cbDestinoActionPerformed
 
     private void jbCalcularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCalcularActionPerformed
-        // TODO add your handling code here:
+//        // TODO add your handling code here:
         JCalendar fi= jdFechai.getJCalendar(); 
         JCalendar ff= jdFechar.getJCalendar();
         
+        Date f1=jdFechai.getDate();
+        Date f2=jdFechar.getDate();
+     
         String dias= calcularDias(fi,ff)+""; // calcula los dias entre fechas
         jtcantDias.setText(dias);
+        //ff.setMinSelectableDate(fi.getDate());
+        
+        if (f1.compareTo(f2) > 0)
+    {
+       JOptionPane.showMessageDialog(null, "La fecha de regreso debe ser posterior a la de inicio");
+    }
+        
+       
+        LocalDate f11 = f1.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+        LocalDate f22 = f2.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+        
+        int mesi = f22.getMonthValue();
+        f22.getDayOfMonth();
+        int mesr = f11.getMonthValue();
+        f11.getDayOfMonth();
+        
+        if (mesi==1 || mesi==7){
+            jcAlta.setSelected(true);
+            int band=1;
+           
+        }
+        if(mesi==2 && mesi==6){
+            jcMedia.setSelected(true);
+            int band=2;
+            
+        }else jcBaja.setSelected(true);
+        
+        Destino des =(Destino)cbDestino.getSelectedItem();
+        Transporte tr=(Transporte)cbTransporte.getSelectedItem();
+        Alojamiento al =(Alojamiento)cbAlojamiento.getSelectedItem();
+        Menu me =(Menu)cbMenu.getSelectedItem();
+        
+       
+        float impT=tr.getPrecioViaje();
+        float impA=al.getPrecioNoche();
+        float impM=me.getPrecioMenu();
+        int cantDias=Integer.parseInt(dias);
+        int cantPas=Integer.parseInt(jtCantPasajeros.getText());
+        
+        float total=(impT*2)+(impA*cantDias)+(impM*cantDias)*cantPas;
+        int band = 0;
+        
+        if(band==1){
+            
+            total=(float) (total*1.3);
+        }if (band==2){
+            total=(float) (total*1.15);
+        }
+        
+        String t=total+"";
+        jtImporteTotal.setText(t);
            
     }//GEN-LAST:event_jbCalcularActionPerformed
 
+   
+    
+    private void jdFecharAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_jdFecharAncestorAdded
+        // TODO add your handling code here:
+//        JCalendar fi= jdFechai.getJCalendar(); 
+//        JCalendar ff= jdFechar.getJCalendar();
+//        
+//        Date f1=jdFechai.getDate();
+//        Date f2=jdFechar.getDate();
+//        
+//        
+//        String dias= calcularDias(fi,ff)+""; // calcula los dias entre fechas
+//        jtcantDias.setText(dias);
+//        
+//        if (f1.compareTo(f2) > 0)
+//    {
+//       JOptionPane.showMessageDialog(null, "La fecha de regreso debe ser posterior a la de inicio");
+//    }
+//     
+//        
+    }//GEN-LAST:event_jdFecharAncestorAdded
+
+    private void jcAltaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcAltaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jcAltaActionPerformed
+
+    private void jbSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSalirActionPerformed
+        // TODO add your handling code here:
+        dispose();
+    }//GEN-LAST:event_jbSalirActionPerformed
+
+    private void jbBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBuscarActionPerformed
+        // TODO add your handling code here:
+        cargarDatos();
+    }//GEN-LAST:event_jbBuscarActionPerformed
+
+    private void jbLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbLimpiarActionPerformed
+        // TODO add your handling code here:
+        limpiar();
+        
+        
+    }//GEN-LAST:event_jbLimpiarActionPerformed
+
     
     public void cargarDatos(){
-     
+    
         Destino des =(Destino)cbDestino.getSelectedItem();
+        int idDest=des.getIdDestino();
+        listaTransportesXDestino = (ArrayList)transporteData.obtenerTransportesXDestino(idDest);
         
-        for(Transporte t: listaTransportes){
-            if(t.getDestino().getIdDestino()==des.getIdDestino()){
-                cbTransporte.addItem(t.getTipoTransporte());
+        TransporteData td=null;
+      
+        for(Transporte t: listaTransportesXDestino){
+            //if(t.getDestino().getIdDestino()==des.getIdDestino()){
+              //if(td.obtenerTransportesXDestino(des.getIdDestino())!=null)  
+                cbTransporte.addItem(t);
                 
-            }
+            
         }
+
+          //cbTransporte.addItem((t.obtenerTransportesXDestino(des.getIdDestino());
+             
         for(Alojamiento a: listaAlojamientos){
             if(des.getIdDestino()==a.getDestino().getIdDestino()){
-                cbAlojamiento.addItem(a.getTipoAlojamiento());
+                cbAlojamiento.addItem(a);
             }
         }
         
         Alojamiento alo=(Alojamiento)cbAlojamiento.getSelectedItem();
-            
+               
         for(Menu m: listaMenues){
             if(alo.getIdAlojamiento()==m.getAlojamiento().getIdAlojamiento()){
-                cbMenu.addItem(m.getTipoMenu());
+                cbMenu.addItem(m);
             }
      
     }
     }
    
-            
-//    public void temporada(){
-//        Calendar dif=jdFechaFinal.getCalendar()-jdFechaInicial.getCalendar();
-//        jdFechaFinal.getd
-//    }
-        
-    
-    
+
    
     public void cargarDestinos(){
         for(Destino i: listaDestinos){
             cbDestino.addItem(i);
         }
-           
+       
      }
     
      
@@ -387,12 +574,14 @@ public final class PaqueteVista extends javax.swing.JInternalFrame {
     private javax.swing.ButtonGroup buttonGroup2;
     private javax.swing.ButtonGroup buttonGroup3;
     private javax.swing.ButtonGroup buttonGroup4;
-    private javax.swing.JComboBox<String> cbAlojamiento;
+    private javax.swing.JComboBox<Alojamiento> cbAlojamiento;
     private javax.swing.JComboBox<Destino> cbDestino;
-    private javax.swing.JComboBox<String> cbMenu;
-    private javax.swing.JComboBox<String> cbTransporte;
+    private javax.swing.JComboBox<Menu> cbMenu;
+    private javax.swing.JComboBox<Transporte> cbTransporte;
+    private javax.swing.JButton jButton1;
     private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JCheckBox jCheckBox2;
+    private com.toedter.calendar.JDateChooser jDateChooser3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -409,8 +598,12 @@ public final class PaqueteVista extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JRadioButton jRadioButton1;
     private javax.swing.JTextField jTextField1;
+    private javax.swing.JButton jbBuscar;
     private javax.swing.JButton jbCalcular;
+    private javax.swing.JButton jbLimpiar;
+    private javax.swing.JButton jbSalir;
     private javax.swing.JCheckBox jcAlta;
+    private javax.swing.JCheckBox jcBaja;
     private javax.swing.JCheckBox jcMedia;
     private com.toedter.calendar.JDateChooser jdFechai;
     private com.toedter.calendar.JDateChooser jdFechar;
