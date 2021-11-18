@@ -9,7 +9,7 @@ package paqueteturistico.modelo;
  *
  * @author Leonardo
  */
-public class Menu {
+public class Menu implements Comparable<Menu>{
     private int idMenu;
     private Alojamiento alojamiento;
     private String tipoMenu;
@@ -83,6 +83,15 @@ public class Menu {
     @Override
     public String toString() {
         return  tipoMenu + "  " + precioMenu + "$";
+    }
+    
+    @Override
+    public int compareTo(Menu t) {
+      if(t.idMenu < idMenu ){
+            return 1;
+        } else if ( t.idMenu == idMenu ){
+            return 0;
+        } else return -1;
     }
     
     
