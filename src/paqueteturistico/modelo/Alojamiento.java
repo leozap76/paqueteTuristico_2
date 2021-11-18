@@ -9,7 +9,7 @@ package paqueteturistico.modelo;
  *
  * @author Nicolas
  */
-public class Alojamiento {
+public class Alojamiento implements Comparable<Alojamiento>{
     private int idAlojamiento;
     private Destino destino;
     private String ubicacion;
@@ -106,6 +106,16 @@ public class Alojamiento {
     @Override
     public String toString() {
         return  nombreAlojamiento +"  "+   precioNoche + "$ X/N" ;
+    }
+    
+    @Override
+    public int compareTo(Alojamiento t) {
+        if(t.idAlojamiento < idAlojamiento ){
+            return 1;
+        } else if ( t.idAlojamiento == idAlojamiento  ){
+            return 0;
+        } else return -1;
+        
     }
     
     
