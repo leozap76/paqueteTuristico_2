@@ -72,7 +72,7 @@ public final class PaqueteVista extends javax.swing.JInternalFrame {
            listaDestinos = (ArrayList) destinoData.obtenerDestinos();
            listaTransportes = (ArrayList)transporteData.obtenerTransportes();
            listaTransportesXDestino = (ArrayList)transporteData.obtenerTransportesXDestino(WIDTH);
-           jtImporteTotal.setEditable(false);
+           
            listaAlojamientos = (ArrayList)alojamientoData.buscarAlojamientos();
            listaMenues = (ArrayList)menuData.buscarMenues();
            listaPaquetes = (ArrayList)paqueteData.obtenerPaquetes();
@@ -159,11 +159,20 @@ public final class PaqueteVista extends javax.swing.JInternalFrame {
 
         jButton1.setText("jButton1");
 
+        setIconifiable(true);
+        setMaximizable(true);
+        setResizable(true);
+
         jLabel1.setText("Destino : ");
 
         jLabel2.setFont(new java.awt.Font("Engravers MT", 1, 18)); // NOI18N
         jLabel2.setText(" Paquete");
 
+        cbDestino.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cbDestinoItemStateChanged(evt);
+            }
+        });
         cbDestino.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbDestinoActionPerformed(evt);
@@ -178,7 +187,9 @@ public final class PaqueteVista extends javax.swing.JInternalFrame {
 
         jLabel6.setText("Cant.Pasajeros :");
 
-        jLabel7.setText("Importe total  $");
+        jLabel7.setText("Importe total      $");
+
+        jtImporteTotal.setEnabled(false);
 
         jtCantPasajeros.setText("1");
 
@@ -319,8 +330,8 @@ public final class PaqueteVista extends javax.swing.JInternalFrame {
                         .addGap(25, 25, 25)
                         .addComponent(jbCalcular)
                         .addGap(18, 18, 18)
-                        .addComponent(jLabel7)
-                        .addGap(18, 18, 18)
+                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jtImporteTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(164, 164, 164)
@@ -340,7 +351,7 @@ public final class PaqueteVista extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel14)
                     .addComponent(cbCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(cbDestino, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -415,9 +426,7 @@ public final class PaqueteVista extends javax.swing.JInternalFrame {
      
      
      public void limpiar(){
-        
-         
-        cbCliente.removeAllItems();
+      
         cbTransporte.removeAllItems();
         cbAlojamiento.removeAllItems();
         cbMenu.removeAllItems();   
@@ -549,6 +558,32 @@ public final class PaqueteVista extends javax.swing.JInternalFrame {
         
         
     }//GEN-LAST:event_jbLimpiarActionPerformed
+
+    private void cbDestinoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbDestinoItemStateChanged
+        // TODO add your handling code here:
+        limpiar();
+        cargarClientes();
+         Destino des =(Destino)cbDestino.getSelectedItem();
+        int idDest=des.getIdDestino();
+        listaTransportesXDestino = (ArrayList)transporteData.obtenerTransportesXDestino(idDest);
+        
+        TransporteData td=null;
+        for(Transporte t: listaTransportesXDestino){
+            cbTransporte.addItem(t);
+            
+        }
+        for(Alojamiento a: listaAlojamientos){
+            if(des.getIdDestino()==a.getDestino().getIdDestino()){
+                cbAlojamiento.addItem(a);
+            }
+        }
+        Alojamiento alo=(Alojamiento)cbAlojamiento.getSelectedItem();
+        for(Menu m: listaMenues){
+            if(alo.getIdAlojamiento()==m.getAlojamiento().getIdAlojamiento()){
+                cbMenu.addItem(m);
+            }
+        }
+    }//GEN-LAST:event_cbDestinoItemStateChanged
 
     
     public void cargarDatos(){

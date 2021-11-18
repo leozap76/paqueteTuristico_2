@@ -57,6 +57,11 @@
       </Properties>
     </Component>
   </NonVisualComponents>
+  <Properties>
+    <Property name="iconifiable" type="boolean" value="true"/>
+    <Property name="maximizable" type="boolean" value="true"/>
+    <Property name="resizable" type="boolean" value="true"/>
+  </Properties>
   <SyntheticProperties>
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
   </SyntheticProperties>
@@ -159,8 +164,8 @@
                       <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
                       <Component id="jbCalcular" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="jLabel7" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="jLabel7" min="-2" pref="97" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                       <Component id="jtImporteTotal" min="-2" pref="99" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
@@ -187,7 +192,7 @@
                   <Component id="jLabel14" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="cbCliente" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="39" max="32767" attributes="0"/>
+              <EmptySpace pref="30" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="cbDestino" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -275,6 +280,7 @@
         </Property>
       </Properties>
       <Events>
+        <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="cbDestinoItemStateChanged"/>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cbDestinoActionPerformed"/>
       </Events>
       <AuxValues>
@@ -333,10 +339,13 @@
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel7">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Importe total  $"/>
+        <Property name="text" type="java.lang.String" value="Importe total      $"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="jtImporteTotal">
+      <Properties>
+        <Property name="enabled" type="boolean" value="false"/>
+      </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="jtCantPasajeros">
       <Properties>
