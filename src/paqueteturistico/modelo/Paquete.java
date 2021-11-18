@@ -11,7 +11,7 @@ import java.time.LocalDate;
  *
  * @author Leonardo
  */
-public class Paquete {
+public class Paquete implements Comparable<Paquete>{
     private int idPaquete;
     private Alojamiento alojamiento;
     private Menu menu;
@@ -143,7 +143,13 @@ public class Paquete {
     }
 
     
-    
+    @Override
+    public int compareTo(Paquete t) {
+        if(t.idPaquete < idPaquete ){
+            return 1;
+        } else if ( t.idPaquete == idPaquete ){
+            return 0;
+        } else return -1;
     
     
     
