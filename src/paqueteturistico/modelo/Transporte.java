@@ -8,7 +8,7 @@ package paqueteturistico.modelo;
  *
  * @author user
  */
-public class Transporte {
+public class Transporte implements Comparable<Transporte>{
     private int idTransporte;
     private Destino destino;
     private float precioViaje;
@@ -81,7 +81,14 @@ public class Transporte {
         return    tipoTransporte + " "  + precioViaje + "$" ;
     }
 
-    
+    @Override
+    public int compareTo(Transporte t) {
+        if(t.idTransporte < idTransporte ){
+            return 1;
+        } else if ( t.idTransporte == idTransporte ){
+            return 0;
+        } else return -1;
+    }
 
    
     
