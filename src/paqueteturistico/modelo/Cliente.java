@@ -9,7 +9,7 @@ package paqueteturistico.modelo;
  *
  * @author Leonardo
  */
-public class Cliente {
+public class Cliente implements Comparable<Cliente>{
     private int idCliente;
     private String nombreCompleto;
     private String email;
@@ -91,6 +91,15 @@ public class Cliente {
     @Override
     public String toString() {
         return  nombreCompleto ;
+    }
+    
+    @Override
+    public int compareTo(Cliente t) {
+        if(t.dni < dni ){
+            return 1;
+        } else if ( t.dni == dni ){
+            return 0;
+        } else return -1;
     }
 
     
